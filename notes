@@ -1,0 +1,4 @@
+sudo ovs-vsctl -- --id=@sflow create sflow agent=eth0 target=\"127.0.0.1:6343\" sampling=64 polling=10 -- -- set bridge s1 sflow=@sflow
+sudo ovs-vsctl -- --id=@sflow create sflow  agent=s1-eth1 target=\"127.0.0.1:6343\" sampling=64 polling=10 -- -- set bridge s1 sflow=@sflow
+sudo docker run --rm -p 8008:8008 -p 6343:6343/udp sflow/sflow-rt
+sudo mn --custom topo2.py --topo topo2 --controller=remote --mac --switch ovsk,protocols=OpenFlow13 --link tc
